@@ -9,7 +9,7 @@ const handler: AWSLambda = {
 	events: [
 		{
 			http: {
-				method: "post",
+				method: "get",
 				path: "get-planet-swapi"
 			},
 		},

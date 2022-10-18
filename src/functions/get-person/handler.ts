@@ -3,38 +3,31 @@ import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 // import { responseApi } from '../../utils/response'
 
-import { v4 } from "uuid";
 import * as AWS from "aws-sdk";
 
-const addPeople: Handler = async (event: APIGatewayEvent) => {
+const getPerson: Handler = async (event: APIGatewayEvent) => {
 
   try {
     const dynamoDb = new AWS.DynamoDB.DocumentClient();
-    const { nombre, genero, planetaOrigen } = JSON.parse(JSON.stringify(event.body));
+    console.log(JSON.stringify(event));
 
-    const createdAt = new Date();
-    const id = v4();
+    console.log(typeof event.pathParameters);
+    console.log(event.pathParameters);
 
-    const newPerson = {
-      id,
-      nombre,
-      genero,
-      planetaOrigen,
-      fechaRegistro: createdAt.toString(),
-    };
+    // const { id } = JSON.parse(JSON.stringify(event.pathParameters));
+    const id = event.queryStringParameters.id;
 
-    await dynamoDb
-      .put({
+    const result = await dynamoDb
+      .get({
         TableName: "PeopleTable",
-        Item: newPerson,
+        Key: { id },
       })
       .promise();
 
-
     return formatJSONResponse(
       {
-        message: "People registered",
-        data: newPerson,
+        message: "Person found.",
+        data: result.Item,
         status: 200
       }
     );
@@ -45,10 +38,11 @@ const addPeople: Handler = async (event: APIGatewayEvent) => {
     return formatJSONResponse(
       {
         error: error.message,
+        message: "No se pudo obtener datos de la persona/personaje",
         status: 500
       }
     );
   }
 };
 
-export const main = middyfy(addPeople);
+export const main = middyfy(getPerson);

@@ -3,11 +3,13 @@ import type { AWS } from '@serverless/typescript';
 import getPeopleSwapi from '@functions/swapi-get-people';
 import getPlanetSwapi from '@functions/swapi-get-planet';
 import addPeople from '@functions/add-people';
+import getPeople from '@functions/get-people';
+import getPerson from '@functions/get-person';
 
 const serverlessConfiguration: AWS = {
   service: 'zoluxiones',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  plugins: ['serverless-auto-swagger','serverless-esbuild'],
   provider: {
     name: 'aws',
     runtime: 'nodejs16.x',
@@ -64,6 +66,13 @@ const serverlessConfiguration: AWS = {
               "dynamodb:DeleteItem",
             ],
             Resource: "arn:aws:dynamodb:us-east-1:375466748597:table/PeopleTable"
+          },
+          {
+            Effect: "Allow",
+            Action: [
+              "execute-api:Invoke"
+            ],
+            Resource: "arn:aws:execute-api:*:*:*"
           }
         ],
       }
@@ -87,7 +96,7 @@ const serverlessConfiguration: AWS = {
     }
   },
   // import the function via paths
-  functions: { getPeopleSwapi, getPlanetSwapi, addPeople },
+  functions: { getPeopleSwapi, getPlanetSwapi, addPeople, getPeople, getPerson },
   package: { individually: true },
   custom: {
     esbuild: {
