@@ -1,26 +1,26 @@
-import type { AWS } from '@serverless/typescript';
+import type { AWS } from "@serverless/typescript";
 
-import getPeopleSwapi from '@functions/swapi-get-people';
-import getPlanetSwapi from '@functions/swapi-get-planet';
-import addPeople from '@functions/add-people';
-import getPeople from '@functions/get-people';
-import getPerson from '@functions/get-person';
+import getPeopleSwapi from "@functions/swapi-get-people";
+import getPlanetSwapi from "@functions/swapi-get-planet";
+import addPeople from "@functions/add-person";
+import getPeople from "@functions/get-people";
+import getPerson from "@functions/get-person";
 
 const serverlessConfiguration: AWS = {
-  service: 'zoluxiones',
-  frameworkVersion: '3',
-  plugins: ['serverless-auto-swagger','serverless-esbuild'],
+  service: "zoluxiones",
+  frameworkVersion: "3",
+  plugins: ["serverless-esbuild"],
   provider: {
-    name: 'aws',
-    runtime: 'nodejs16.x',
-    stage: 'dev',
+    name: "aws",
+    runtime: "nodejs16.x",
+    stage: "dev",
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+      NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
     iam: {
       role: {
@@ -81,15 +81,15 @@ const serverlessConfiguration: AWS = {
   resources: {
     Resources: {
       PeopleTable: {
-        Type: 'AWS::DynamoDB::Table',
+        Type: "AWS::DynamoDB::Table",
         Properties: {
-          TableName: 'PeopleTable',
+          TableName: "PeopleTable",
           BillingMode: "PAY_PER_REQUEST",
           AttributeDefinitions: [
-            { AttributeName: 'id', AttributeType: 'S' }
+            { AttributeName: "id", AttributeType: "S" }
           ],
           KeySchema: [
-            { AttributeName: 'id', KeyType: 'HASH' }
+            { AttributeName: "id", KeyType: "HASH" }
           ]
         }
       }
@@ -103,10 +103,10 @@ const serverlessConfiguration: AWS = {
       bundle: true,
       minify: false,
       sourcemap: true,
-      exclude: ['aws-sdk'],
-      target: 'node16',
-      define: { 'require.resolve': undefined },
-      platform: 'node',
+      exclude: ["aws-sdk"],
+      target: "node16",
+      define: { "require.resolve": undefined },
+      platform: "node",
       concurrency: 10,
     },
   },

@@ -5,17 +5,11 @@ import { responseApi } from "../../utils/response";
 import { Planet } from "../../models/Planet";
 
 
-export const getPlanetSwapi = async (language: string = "en") => {
+export const getPlanetSwapi = async (language = "en") => {
     try {
 
         const { data } = await axios.get("https://swapi.py4e.com/api/planets/");
-
-        console.log(data);
-
-        let dataResponse: Planet[] = data.results;
-
-        console.log(dataResponse);
-
+        const dataResponse: Planet[] = data.results;
 
         if (dataResponse.length === 0) {
             return responseApi(data, "No hay datos registrados.", 404);

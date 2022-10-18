@@ -1,4 +1,3 @@
-// import schema from "./schema";
 import { handlerPath } from "@libs/handler-resolver";
 import { AWSLambda } from "../../utils/lambdaFunctionInterface";
 
@@ -10,7 +9,7 @@ const handler: AWSLambda = {
 		{
 			http: {
 				method: "get",
-				path: "get-people-swapi"
+				path: "swapi/people"
 			},
 		},
 	],

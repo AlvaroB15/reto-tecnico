@@ -9,7 +9,7 @@ const getPlanet: Handler = async (event: APIGatewayEvent) => {
 
         return formatJSONResponse(
             {
-                message: "User Found",
+                message: "Planet Found",
                 data: response,
                 status: 200
             }

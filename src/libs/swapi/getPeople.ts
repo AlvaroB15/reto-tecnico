@@ -5,16 +5,11 @@ import { responseApi } from "../../utils/response";
 import { People } from "../../models/People";
 
 
-export const getPeopleSwapi = async (language: string = "en") => {
+export const getPeopleSwapi = async (language = "en") => {
 	try {
 
 		const { data } = await axios.get("https://swapi.py4e.com/api/people/");
-
-		console.log(data);
-
-		let dataResponse: People[] = data.results;
-
-		console.log(dataResponse);
+		const dataResponse: People[] = data.results;
 
 		if (dataResponse.length === 0) {
 			return responseApi(data, "No hay datos registrados.", 404);

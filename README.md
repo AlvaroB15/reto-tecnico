@@ -1,3 +1,70 @@
+# PRUEBA TECNICA - ALVARO BEGAZO CARHUAYO
+
+URL de los lambdas.
+
+## GET PEOPLE LIST SWAPI
+
+- languages (en:english, and es:spanish)
+
+GET  ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/swapi/people?lan=es```
+
+GET  ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/swapi/people?lan=en```
+
+
+
+## GET PLANETS LIST SWAPI
+
+GET ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/swapi/planet?lan=es```
+
+GET ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/swapi/planet?lan=en```
+
+
+
+## ADD PERSON
+
+POST ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/people```
+
+```
+    // Body
+    {
+        "nombre": "Barack Obama",
+        "genero": "Masculino",
+        "planetaOrigen": "Tierra"
+    }
+
+    // Headers 
+    Content-Type            application/json
+
+```
+## GET PEOPLE
+
+GET ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/people```
+
+## GET PERSON
+
+GET ```https://intoohhj4m.execute-api.us-east-1.amazonaws.com/dev/person?id={nroId}```
+
+
+Para solo importar un .json en el postman, descargar del siguiente link
+
+https://drive.google.com/file/d/10vhb1buU1Ou1idxn0ZW5ImOuu-epMRkt/view?usp=sharing
+
+
+Para poder ejecutar el linter
+
+```npm run lint ```
+
+Para hacer el build de produccion
+
+```npm run build```
+
+Para hacer el deploy del serverless en aws (teniendo una cuenta de aws configurada en aws-cli)
+
+```sls deploy```
+
+# -----------------------------------------------------------------------------------------------
+
+
 # Serverless - AWS Node.js Typescript
 
 This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/).

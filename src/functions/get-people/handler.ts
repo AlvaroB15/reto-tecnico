@@ -1,19 +1,12 @@
-import { APIGatewayEvent, Handler } from "aws-lambda";
+import { Handler } from "aws-lambda";
 import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
-// import { responseApi } from '../../utils/response'
-import * as AWS from "aws-sdk";
+import { getPeopleService } from "../../services/people";
 
-const addPeople: Handler = async (event: APIGatewayEvent) => {
+const getPeople: Handler = async () => {
 
   try {
-    const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-    const result = await dynamoDb
-      .scan({
-        TableName: "PeopleTable",
-      })
-      .promise();
+    const result = await getPeopleService();
 
     return formatJSONResponse(
       {
@@ -35,4 +28,4 @@ const addPeople: Handler = async (event: APIGatewayEvent) => {
   }
 };
 
-export const main = middyfy(addPeople);
+export const main = middyfy(getPeople);

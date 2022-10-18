@@ -34,7 +34,7 @@ export const fieldsPlanets = {
 	url: "url",
 };
 
-export const mapearCampoES = (camposEntidad: any, instancia: any) => {
+export const mapearCampoES = (camposEntidad, instancia) => {
 	return Object.keys(instancia).reduce((objeto, atributo) => {
 		const campoTraducido = camposEntidad[atributo];
 		objeto[campoTraducido] = instancia[atributo];
